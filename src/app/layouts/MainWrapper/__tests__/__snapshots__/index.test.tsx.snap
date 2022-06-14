@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MainWrapper  /> should match snapshot 1`] = `
+<div
+  class="theme-light 
+              round-borders-on
+              blocks-shadows-on
+              ltr-support"
+  dir="ltr"
+>
+  <div
+    class="wrapper top-navigation"
+  >
+    <div />
+  </div>
+</div>
+`;
