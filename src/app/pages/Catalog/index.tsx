@@ -25,6 +25,15 @@ export const Catalog = () => {
   return (
     <Container>
       <Row>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">One of three columns</div>
+            <div className="col-sm">One of three columns</div>
+            <div className="col-sm">One of three columns</div>
+          </div>
+        </div>
+      </Row>
+      <Row>
         <Col md={12}>
           <PageTitle onClick={() => dispatch(catalogActions.fetchCatalogs())}>
             Catalog
@@ -36,12 +45,24 @@ export const Catalog = () => {
         </Col>
       </Row>
       <Row>
-        <CatalogItems/>
+        <CatalogItems catalogList={catalogs} />
       </Row>
     </Container>
   );
 };
-
+const menuItem = styled(Row)`
+  margin-bottom: 30px;
+  height: 20px;
+  position: relative;
+  background-color: #fff;
+  margin-right: 30px;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+  border-radius: 5px;
+  box-shadow: none;
+`;
 const PageTitle = styled.h3`
   color: #646777;
   text-align: left;

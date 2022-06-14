@@ -14,25 +14,12 @@ const Catalog = ({ items }) => (
       {items.map(item => (
         <CatalogItem key={item.i}>
           <CatalogItemLink to="/e-commerce/product_page">
-            {item.new ? <CatalogItemLabel src={New} alt="new" /> : ''}
-            {item.sale ? <CatalogItemLabel src={Sale} alt="sale" /> : ''}
             <CatalogItemImageWrap>
-              <CatalogItemImg src={item.src} alt="catalog-item-img" />
+              <CatalogItemImg src={`https://test.api.simplemarket.app/api${item.ImageLink}`} alt="catalog-item-img" />
             </CatalogItemImageWrap>
             <CatalogItemInfo>
-              <CatalogItemTitle>{item.title}</CatalogItemTitle>
-              <CatalogItemDescription>
-                {item.description}
-              </CatalogItemDescription>
-              <CatalogItemPrice>${item.price}</CatalogItemPrice>
-              {item.sale ? (
-                <CatalogItemOldPrice>${item.oldPrice}</CatalogItemOldPrice>
-              ) : (
-                ''
-              )}
-              {item.colors.map(color => (
-                <CatalogItemColor key={color.i} style={{ background: color }} />
-              ))}
+              <CatalogItemTitle>{item.Name}</CatalogItemTitle>
+              <CatalogItemPrice>${item.SalesPrice}</CatalogItemPrice>
             </CatalogItemInfo>
           </CatalogItemLink>
           <div>
@@ -141,7 +128,7 @@ const CatalogItemTitle = styled.h4`
   color: #646777;
   font-weight: 600;
   transition: all 0.3s;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
   margin-top: 0;
   margin-bottom: 0;
@@ -165,7 +152,7 @@ const CatalogItemPrice = styled.h1`
   position: absolute;
   top: 0;
   line-height: 36px;
-  font-size: 36px;
+  font-size: 20px;
   margin-top: 0;
   font-weight: 400;
   margin-bottom: 0;

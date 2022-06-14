@@ -1,10 +1,9 @@
 import React from 'react';
 import { Col } from 'reactstrap';
 import ProductItems from './ProductItems';
-import catalogList from './catalog_list';
+//import catalogList from './catalog_list';
 
-
-const CatalogItems = () => (
+const CatalogItems = ({ catalogList }) => (
   <Col md={12} lg={12}>
     <ProductItems items={catalogList} />
   </Col>

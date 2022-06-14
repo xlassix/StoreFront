@@ -5,7 +5,7 @@ import { catalogActions } from '.';
 function* fetchCatalog() {
   yield delay(500);
   try {
-    const res = yield call(apiCall, 'GET', '/photos');
+    const res = yield call(apiCall, 'GET', '/Inventory/GetAllProducts');
     yield put(catalogActions.catalogLoaded(res));
   } catch (error) {
     //yield put(catalogActions.updateErrorStat(error));
