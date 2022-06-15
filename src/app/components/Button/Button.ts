@@ -36,7 +36,7 @@ export const Button = styled.button`
     height: 0;
     width: 0;
     border-radius: 50%;
-    background-color: ${StyleConstants.COLOR_ACCENT};
+    background-color: ${StyleConstants.COLOR_ACCENT2};
     transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
     z-index: -1;
     content: '';

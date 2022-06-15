@@ -1,8 +1,3 @@
-/**
- *
- * AuthGuard
- *
- */
 import React, { memo } from 'react';
 
 interface Props {}

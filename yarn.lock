@@ -2075,7 +2075,7 @@
 
 "@types/react-smooth-scrollbar@8.0.3":
   version "8.0.3"
-  resolved "https://registry.npmjs.org/@types/react-smooth-scrollbar/-/react-smooth-scrollbar-8.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/@types/react-smooth-scrollbar/-/react-smooth-scrollbar-8.0.3.tgz#df95e6b89925f643edc3831cda105d8ea98c85f2"
   integrity sha512-WNAA8YN3+BLqIK9GImX63/TDPNuOv54wpgM/Y0Qz02wIdOndB1qO/BaG0+PTBD6txMdhPK0i5xHYeVUVc7+qWg==
   dependencies:
     "@types/react" "*"
@@ -5084,6 +5084,11 @@ dotenv-expand@5.1.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/dotenv-expand/-/dotenv-expand-5.1.0.tgz"
   integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
+dotenv@16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.1.tgz#8f8f9d94876c35dac989876a5d3a82a267fdce1d"
+  integrity sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==
 
 dotenv@8.2.0:
   version "8.2.0"
@@ -12356,10 +12361,19 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-smooth-scrollbar@8.6.3, smooth-scrollbar@^8.2.5:
+smooth-scrollbar@8.6.3:
   version "8.6.3"
   resolved "https://registry.npmjs.org/smooth-scrollbar/-/smooth-scrollbar-8.6.3.tgz"
   integrity sha512-YTGK6+Vhw53sbdFVD8FSr+z2Ugp7hGAxKD3tNtYFq23fGn/oknWTwpWxym5aCYMXdzNNeKtiWbdu5op5bauzAw==
+  dependencies:
+    core-js "^3.6.4"
+    lodash-es "^4.17.21"
+    tslib "^1.10.0"
+
+smooth-scrollbar@^8.2.5:
+  version "8.7.4"
+  resolved "https://registry.yarnpkg.com/smooth-scrollbar/-/smooth-scrollbar-8.7.4.tgz#1cf3978c1702587c5ffed69806e00511440b2f6d"
+  integrity sha512-BSqZJExXoGbl9FGA4ci33DNmlHFRvDxJk4Q8OXmYykRLa1Hzg2YiV5slVogMd1UsxzNf6m0nralT8GdanKWoYw==
   dependencies:
     core-js "^3.6.4"
     lodash-es "^4.17.21"

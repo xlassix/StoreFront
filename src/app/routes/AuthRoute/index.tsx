@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { Signup } from '../../pages/auth/Signup/Loadable';
+import { SignIn } from '../../pages/auth/SignIn/Loadable';
 import { NotAuthGuard } from '../guards/NotAuthGuard/index';
 // import { SplitView } from '../../layouts/SplitView/index';
 import { NotFoundPage } from '../../pages/NotFoundPage/index';
@@ -14,9 +14,9 @@ export const AuthRoute = memo((props: Props) => {
   const isAuthenticated = false;
   return (
     <Switch>
-      <NotAuthGuard exact path="/auth/signup" isAuthenticated={isAuthenticated}>
+      <NotAuthGuard exact path="/auth/signin" isAuthenticated={isAuthenticated}>
         {/* <SplitView> */}
-        <Signup />
+        <SignIn />
         {/* </SplitView> */}
       </NotAuthGuard>
       <Route path="*" component={NotFoundPage} />
