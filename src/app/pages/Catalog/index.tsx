@@ -26,11 +26,13 @@ export const Catalog = () => {
     <Container>
       <Row>
         <div className="container">
-          <div className="row">
-            <div className="col-sm">One of three columns</div>
-            <div className="col-sm">One of three columns</div>
-            <div className="col-sm">One of three columns</div>
-          </div>
+          <DivName>
+            <ColName>Selected Store(BamBam Store)</ColName>
+            <ColName>Payment Method (Cash on Delivery)</ColName>
+            <ColName>Order Total (₦0)</ColName>
+            <ColName>Summary and Checkout</ColName>
+            <ColName>View Product Images</ColName>
+          </DivName>
         </div>
       </Row>
       <Row>
@@ -64,6 +66,7 @@ const menuItem = styled(Row)`
   box-shadow: none;
 `;
 const PageTitle = styled.h3`
+  margin-top: 30px;
   color: #646777;
   text-align: left;
   font-weight: 500;
@@ -78,4 +81,18 @@ const PageSubhead = styled.h3`
   text-align: left;
   line-height: 24px;
   color: #999;
+`;
+
+const ColName = styled.span`
+  margin-left: 5px;
+  height: 50px;
+  padding: 32px;
+  color: #ffffff;
+  background-color: #100276;
+  width: auto;
+  font-size: 9px;
+`;
+
+const DivName = styled.div`
+  margin-top: 30px;
 `;
