@@ -7,9 +7,7 @@ interface Props {}
 export const SignIn = memo((props: Props) => {
   return (
     <Body>
-      <Login>
-        <h3>Sign</h3>
-      </Login>
+      <Login />
     </Body>
   );
 });

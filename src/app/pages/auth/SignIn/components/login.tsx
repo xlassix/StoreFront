@@ -1,45 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Card } from '../layout/card';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Button } from 'app/components/Button/Button';
 import * as Yup from 'yup';
+import { apiCall } from 'utils/axios';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useHistory } from 'react-router';
 
 interface Props {
-  children: React.ReactNode;
+  // children: React.ReactNode;
 }
 
 const Login = (props: Props) => {
+  const setUser = useStoreActions((actions: any) => actions.setUser);
+  const history = useHistory();
+  const user = useStoreState((state: any) => state.user);
+
+  useEffect(() => {
+    if (user.isAuthenticated) {
+      history.push('/');
+    }
+  }, [history]);
+
   return (
     <Card>
       <Formik
-        initialValues={{ username: '', password: '' }}
+        initialValues={{ UserName: '', Password: '' }}
         validationSchema={Yup.object({
-          username: Yup.string()
+          UserName: Yup.string()
             .max(15, '* Must be 15 characters or less')
             .required('* Required'),
-          password: Yup.string()
+          Password: Yup.string()
             .max(20, '* Must be 20 characters or less')
             .required('* Required'),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 4000);
+        onSubmit={async values => {
+          try {
+            const res = await apiCall(
+              'GET',
+              '/LoginResponse',
+              values,
+              null,
+              true,
+            );
+            setUser(res);
+            history.push('/');
+          } catch (error) {
+            //yield put(catalogActions.updateErrorStat(error));
+            console.log('Error');
+          }
         }}
       >
         <StyledForm>
           <div>
-            <label htmlFor="username">UserName</label>
-            <StyledField name="username" type="text" />
-            <StyledErrorMessage name="username" component="p" />
+            <label htmlFor="UserName">UserName</label>
+            <StyledField name="UserName" type="text" />
+            <StyledErrorMessage name="UserName" component="p" />
           </div>
 
           <div>
-            <label htmlFor="password">Passcode</label>
-            <StyledField name="password" type="password" />
-            <StyledErrorMessage name="password" component="p" />
+            <label htmlFor="Password">Passcode</label>
+            <StyledField name="Password" type="Password" />
+            <StyledErrorMessage name="Password" component="p" />
           </div>
 
           <LoginButton type="submit">Submit</LoginButton>

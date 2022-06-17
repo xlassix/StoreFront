@@ -5,7 +5,19 @@ const client = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   headers: { Authorization: `Bearer ${token}` },
 });
-export const apiCall = function (method, route, body = null, token = null) {
+
+const clientTest = axios.create({
+  baseURL: 'http://localhost:5050',
+  headers: { Authorization: `Bearer ${token}` },
+});
+
+export const apiCall = function (
+  method,
+  route,
+  body: any = null,
+  token = null,
+  test = false,
+) {
   const onSuccess = function (response) {
     return response.data;
   };
@@ -21,11 +33,19 @@ export const apiCall = function (method, route, body = null, token = null) {
     return Promise.reject(error.response || error.message);
   };
 
-  return client({
-    method,
-    url: route,
-    data: body,
-  })
-    .then(onSuccess)
-    .catch(onError);
+  return test
+    ? clientTest({
+        method,
+        url: route,
+        data: body,
+      })
+        .then(onSuccess)
+        .catch(onError)
+    : client({
+        method,
+        url: route,
+        data: body,
+      })
+        .then(onSuccess)
+        .catch(onError);
 };
