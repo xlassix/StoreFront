@@ -94,8 +94,8 @@ const StyledForm = styled(Form)`
 
   input {
     line-height: 1.4;
-    border-color: var(--bs-gray-200);
-    border-width: 0.1rem;
+    outline: 1px solid var(--bs-gray-300);
+    border: none;
     border-radius: 0.5rem;
     padding: 0.1rem 0.5rem;
     &:hover,
