@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { HomePage } from '../../pages/HomePage/Loadable';
 import { MainView } from '../../layouts/MainView/index';
 import { NotFoundPage } from '../../pages/NotFoundPage/index';
+import { Stores } from '../../pages/Stores/index';
 
 interface Props {}
 
@@ -18,6 +19,11 @@ export const LandingRoute = memo((props: Props) => {
       <Route exact path="/home">
         <MainView>
           <HomePage />
+        </MainView>
+      </Route>
+      <Route exact path="/store">
+        <MainView>
+          <Stores />
         </MainView>
       </Route>
       <Route path="*" component={NotFoundPage} />

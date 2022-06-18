@@ -6,6 +6,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import { StoreProvider } from 'easy-peasy';
+import { SWRConfig } from 'swr';
 // Use consistent styling
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -35,15 +36,17 @@ const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <StoreProvider store={userStore}>
-    <Provider store={store}>
-      <ThemeProvider>
-        <HelmetProvider>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        </HelmetProvider>
-      </ThemeProvider>
-    </Provider>
+    <SWRConfig>
+      <Provider store={store}>
+        <ThemeProvider>
+          <HelmetProvider>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </HelmetProvider>
+        </ThemeProvider>
+      </Provider>
+    </SWRConfig>
   </StoreProvider>,
   MOUNT_NODE,
 );
