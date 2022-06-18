@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import CatalogItems from './components/CatalogItems';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, selectCatalogs } from './slice/selector';
 import { catalogActions, useCatalogSlice } from './slice';
+import { selectBasket } from './slice/basketSelector';
+import { SummarySection } from './components/SummarySection';
+
 export const Catalog = () => {
   const catalogs = useSelector(selectCatalogs);
-  const loading = useSelector(selectLoading);
+  // const loading = useSelector(selectLoading);
+
   const { actions } = useCatalogSlice();
 
   const dispatch = useDispatch();
@@ -16,25 +20,13 @@ export const Catalog = () => {
     dispatch(actions.fetchCatalogs());
   }, []);
 
-  console.log(catalogs);
-
   // if (loading) {
   //   return <h4>Loading...</h4>;
   // }
 
   return (
     <Container>
-      <Row>
-        <div className="container">
-          <DivName>
-            <ColName>Selected Store(BamBam Store)</ColName>
-            <ColName>Payment Method (Cash on Delivery)</ColName>
-            <ColName>Order Total (₦0)</ColName>
-            <ColName>Summary and Checkout</ColName>
-            <ColName>View Product Images</ColName>
-          </DivName>
-        </div>
-      </Row>
+      <SummarySection />
       <Row>
         <Col md={12}>
           <PageTitle onClick={() => dispatch(catalogActions.fetchCatalogs())}>
@@ -81,18 +73,4 @@ const PageSubhead = styled.h3`
   text-align: left;
   line-height: 24px;
   color: #999;
-`;
-
-const ColName = styled.span`
-  margin-left: 5px;
-  height: 50px;
-  padding: 32px;
-  color: #ffffff;
-  background-color: #100276;
-  width: auto;
-  font-size: 9px;
-`;
-
-const DivName = styled.div`
-  margin-top: 30px;
 `;

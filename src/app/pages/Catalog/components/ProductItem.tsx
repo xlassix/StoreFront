@@ -1,106 +1,69 @@
-import { Button } from 'app/components/Button/Button';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { CardBody } from 'reactstrap';
 import styled from 'styled-components';
 import { customMedia } from 'styles/media';
+import { useBasketSlice } from '../slice/basketSlice';
+import { selectBasket } from '../slice/basketSelector';
+import { useDispatch, useSelector } from 'react-redux';
 
-interface Catalog {
-  name: string;
-  itemId: string;
-  salesPrice: number;
-  itemCount: any;
-}
+const ProductItem = ({ item }) => {
+  const [quantity, setQuantity] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
 
-let StoreCatalogItems: Catalog[] = [];
+  const dispatch = useDispatch();
 
-let ItemCount = StoreCatalogItems.length;
+  const baskets = useSelector(selectBasket);
+  const { actions } = useBasketSlice();
 
-const AddToCart = (num, item) => {
-  for (var i = 0; i < StoreCatalogItems.length; i++) {
-    if (StoreCatalogItems[i].itemId === item.ItemId) {
-      ItemCount = i;
-      break;
-    }
-  }
+  const addToCart = (itemQuantity, item) => {
+    let prevQuantity =
+      baskets?.items.find(i => i.productId === item.ItemId)?.quantity ?? 0;
 
+    dispatch(
+      actions.addItem({
+        name: item.Name,
+        productId: item.ItemId,
+        price: item.SalesPrice,
+        quantity: itemQuantity,
+      }),
+    );
 
-  StoreCatalogItems[ItemCount] = {
-    name: item.Name,
-    itemId: item.ItemId,
-    salesPrice: item.SalesPrice,
-    itemCount: num,
+    var totalQty = prevQuantity + itemQuantity;
+
+    setSubTotal(totalQty * item.SalesPrice);
+
+    setQuantity(totalQty);
   };
 
-  alert(ItemCount + ' - ' + item.Name);
+  return (
+    <CatalogItem key={item.i}>
+      <CatalogItemLink>
+        <CatalogItemImageWrap>
+          <CatalogItemImg
+            src={`https://test.api.simplemarket.app/api${item.ImageLink}`}
+            alt="catalog-item-img"
+          />{' '}
+        </CatalogItemImageWrap>
+        <CatalogItemInfo>
+          <CatalogItemTitle>{item.Name}</CatalogItemTitle>
+          <CatalogItemDescription>{item.description}</CatalogItemDescription>
+          <CatalogItemPrice>Unit Price : ₦ {item.SalesPrice}</CatalogItemPrice>
+        </CatalogItemInfo>
+        <div>
+          <SearchBtn onClick={() => addToCart(1, item)}>Add +1</SearchBtn>
+          <SearchBtn>Add +3</SearchBtn>
+          <SearchBtn>Reduce -3</SearchBtn>
+        </div>
+        <div>
+          <Quantity>
+            Quantity : <TextAfterBtn>{quantity}</TextAfterBtn> Subtotal :
+            <TextAfterBtn>₦{subTotal}</TextAfterBtn>
+          </Quantity>
+        </div>
+      </CatalogItemLink>
+    </CatalogItem>
+  );
 };
-
-const SubFromCart = (num, item) => {
-  StoreCatalogItems[ItemCount] = {
-    name: item.Name,
-    itemId: item.ItemId,
-    salesPrice: item.SalesPrice,
-    itemCount: item.num,
-  };
-
-  alert(ItemCount + ' - ' + item.Name);
-};
-const Catalog = ({ items }) => (
-  <CatalogItemsWrap>
-    <CatalogItems>
-      {items.map(item => (
-        <CatalogItem key={item.i}>
-          <CatalogItemLink>
-            <CatalogItemImageWrap>
-              <CatalogItemImg
-                src={`https://test.api.simplemarket.app/api${item.ImageLink}`}
-                alt="catalog-item-img"
-              />{' '}
-            </CatalogItemImageWrap>
-            <CatalogItemInfo>
-              <CatalogItemTitle>{item.Name}</CatalogItemTitle>
-              <CatalogItemDescription>
-                {item.description}
-              </CatalogItemDescription>
-              <CatalogItemPrice>
-                Unit Price : ₦ {item.SalesPrice}
-              </CatalogItemPrice>
-            </CatalogItemInfo>
-            <div>
-              <SearchBtn onClick={() => AddToCart(1, item)}>Add +1</SearchBtn>
-              <SearchBtn onClick={() => AddToCart(3, item)}>Add +3</SearchBtn>
-              <SearchBtn onClick={() => SubFromCart(1, item)}>
-                Reduce -1
-              </SearchBtn>
-            </div>
-            <div>
-              <Quantity>
-                Quantiy : <TextAfterBtn>40</TextAfterBtn>
-              </Quantity>
-            </div>
-          </CatalogItemLink>
-        </CatalogItem>
-      ))}
-    </CatalogItems>
-  </CatalogItemsWrap>
-);
-
-const CatalogItemsWrap = styled.div`
-  overflow: hidden;
-  width: 100%;
-`;
-
-const CatalogItems = styled.div`
-  width: calc(100% + 30px);
-  display: flex;
-  flex-wrap: wrap;
-  font-family: 'Roboto', sans-serif;
-  font-size: 13px;
-  line-height: 1.6;
-  box-sizing: inherit;
-  color: #212529;
-  text-align: left;
-`;
 
 const CatalogItem = styled(CardBody)`
   width: calc(33.3333% - 30px);
@@ -206,6 +169,7 @@ const CatalogItemOldPrice = styled.p`
 `;
 
 const SearchBtn = styled.span`
+  /* margin-top: 100px; */
   margin-left: 5px;
   height: 30px;
   padding: 10px;
@@ -231,9 +195,11 @@ const SearchBtn = styled.span`
 const Quantity = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
-  text-align: center;
+  text-align: left;
+  /* width: 50%; */
   height: 30px;
-  padding: 10px 10px 0px 10px;
+  padding: 10px 0px 0px 10px;
+  /* border: 1px solid rgb(218, 218, 218); */
   border-radius: 5px;
 `;
 
@@ -242,9 +208,9 @@ const TextAfterBtn = styled.span`
   margin-bottom: 10px;
   width: 100%;
   height: 30px;
-  padding: 10px 10px 10px 10px;
+  padding: 5px 3px 5px 3px;
   border: 1px solid rgb(218, 218, 218);
   border-radius: 5px;
 `;
 
-export default Catalog;
+export default ProductItem;
