@@ -33,7 +33,7 @@ export const SummarySection = () => {
 const ColName = styled.span`
   margin-left: 5px;
   height: 50px;
-  padding: 32px;
+  padding: 28px;
   color: #ffffff;
   background-color: #100276;
   width: auto;

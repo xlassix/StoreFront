@@ -35,6 +35,28 @@ const ProductItem = ({ item }) => {
     setQuantity(totalQty);
   };
 
+  const removeFromCart = item => {
+    let prevQuantity =
+      baskets?.items.find(i => i.productId === item.ItemId)?.quantity ?? 0;
+
+    let totalQty = 0;
+
+    if (prevQuantity > 0) {
+      dispatch(
+        actions.removeItem({
+          productId: item.ItemId,
+          quantity: 1,
+        }),
+      );
+
+      totalQty = prevQuantity - 1;
+    }
+
+    setSubTotal(totalQty * item.SalesPrice);
+
+    setQuantity(totalQty);
+  };
+
   return (
     <CatalogItem key={item.i}>
       <CatalogItemLink>
@@ -51,8 +73,8 @@ const ProductItem = ({ item }) => {
         </CatalogItemInfo>
         <div>
           <SearchBtn onClick={() => addToCart(1, item)}>Add +1</SearchBtn>
-          <SearchBtn>Add +3</SearchBtn>
-          <SearchBtn>Reduce -3</SearchBtn>
+          <SearchBtn onClick={() => addToCart(3, item)}>Add +3</SearchBtn>
+          <SearchBtn onClick={() => removeFromCart(item)}>Reduce -1</SearchBtn>
         </div>
         <div>
           <Quantity>
@@ -81,7 +103,7 @@ const CatalogItem = styled(CardBody)`
 `;
 
 const CatalogItemLink = styled.div`
-  padding: 40px 15px;
+  padding: 40px 13px;
   display: block;
   text-decoration: none;
   color: #3ea3fc;
@@ -208,7 +230,7 @@ const TextAfterBtn = styled.span`
   margin-bottom: 10px;
   width: 100%;
   height: 30px;
-  padding: 5px 3px 5px 3px;
+  padding: 5px 1px 5px 1px;
   border: 1px solid rgb(218, 218, 218);
   border-radius: 5px;
 `;
