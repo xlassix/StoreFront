@@ -64,6 +64,10 @@ const ProductItem = ({ item }) => {
           <CatalogItemImg
             src={`https://test.api.simplemarket.app/api${item.ImageLink}`}
             alt="catalog-item-img"
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = '/img/Product Image @@.png';
+            }}
           />{' '}
         </CatalogItemImageWrap>
         <CatalogItemInfo>
@@ -71,24 +75,25 @@ const ProductItem = ({ item }) => {
           <CatalogItemDescription>{item.description}</CatalogItemDescription>
           <CatalogItemPrice>Unit Price : ₦ {item.SalesPrice}</CatalogItemPrice>
         </CatalogItemInfo>
-        <div>
+        <Center>
           <SearchBtn onClick={() => addToCart(1, item)}>Add +1</SearchBtn>
           <SearchBtn onClick={() => addToCart(3, item)}>Add +3</SearchBtn>
           <SearchBtn onClick={() => removeFromCart(item)}>Reduce -1</SearchBtn>
-        </div>
-        <div>
+        </Center>
+        <Center>
           <Quantity>
             Quantity : <TextAfterBtn>{quantity}</TextAfterBtn> Subtotal :
             <TextAfterBtn>₦{subTotal}</TextAfterBtn>
           </Quantity>
-        </div>
+        </Center>
       </CatalogItemLink>
     </CatalogItem>
   );
 };
 
 const CatalogItem = styled(CardBody)`
-  width: calc(33.3333% - 30px);
+  flex-basis: calc(33.3333% - 30px);
+  max-width: calc(33.3333% - 30px);
   margin-bottom: 30px;
   height: 460px;
   position: relative;
@@ -100,6 +105,16 @@ const CatalogItem = styled(CardBody)`
   padding: 1.25rem;
   border-radius: 5px;
   box-shadow: none;
+
+  ${customMedia.lessThan('large')`
+  flex-basis: calc(49% - 30px);
+  max-width: calc(49% - 30px);
+`};
+
+  ${customMedia.lessThan('medium')`
+flex-basis: calc(90% - 30px);
+max-width: calc(90% - 30px);
+`};
 `;
 
 const CatalogItemLink = styled.div`
@@ -153,6 +168,9 @@ const CatalogItemTitle = styled.h4`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   text-align: center;
   border-bottom: 1px solid rgb(218, 218, 218);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     color: #4ce1b6;
@@ -193,7 +211,7 @@ const CatalogItemOldPrice = styled.p`
 const SearchBtn = styled.span`
   /* margin-top: 100px; */
   margin-left: 5px;
-  height: 30px;
+  min-height: 30px;
   padding: 10px;
   cursor: pointer;
   color: #ffffff;
@@ -233,6 +251,12 @@ const TextAfterBtn = styled.span`
   padding: 5px 1px 5px 1px;
   border: 1px solid rgb(218, 218, 218);
   border-radius: 5px;
+`;
+
+const Center = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default ProductItem;

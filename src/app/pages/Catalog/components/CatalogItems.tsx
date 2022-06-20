@@ -38,6 +38,7 @@ const CatalogItemStyles = styled.div`
   width: calc(100% + 30px);
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row wrap;
   font-family: 'Roboto', sans-serif;
   font-size: 13px;
   line-height: 1.6;
