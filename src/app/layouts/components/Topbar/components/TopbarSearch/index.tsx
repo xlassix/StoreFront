@@ -1,21 +1,31 @@
-import React, { memo } from 'react';
+import React, { memo, useState, useRef } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
 import { customMedia } from 'styles/media';
 import { Button } from '../../../../../components/Button/Button';
 import { ReactComponent as Search } from '../../assets/search.svg';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 interface Props {}
 
 export const TopbarSearch = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
+  const inputRef = useRef(null);
+  const setSearch = useStoreActions((actions: any) => actions.setSearch);
+  const search = useStoreState((state: any) => state.search);
 
   return (
     <Form>
       <SearchIcon />
-      <SearchField placeholder={t(...messages.placeholder())} />
+      <SearchField
+        type="text"
+        placeholder={t(...messages.placeholder())}
+        onChange={e => setSearch(e.target.value)}
+        ref={inputRef}
+        value={search}
+      />
       <SearchBtn className="btn btn-dark">{t(...messages.btnText())}</SearchBtn>
     </Form>
   );

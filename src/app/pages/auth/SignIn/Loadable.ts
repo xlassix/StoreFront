@@ -1,6 +1,6 @@
 import { lazyLoad } from 'utils/loadable';
 
-export const Signup = lazyLoad(
+export const SignIn = lazyLoad(
   () => import('./index'),
-  module => module.Signup,
+  module => module.SignIn,
 );

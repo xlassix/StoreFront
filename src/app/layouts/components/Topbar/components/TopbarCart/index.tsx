@@ -5,8 +5,22 @@ import { messages } from './messages';
 import { customMedia } from 'styles/media';
 import { ReactComponent as Cart } from '../../assets/shopping_cart.svg';
 import { StyleConstants } from 'styles/StyleConstants';
+import { selectBasket } from 'app/pages/Catalog/slice/basketSelector';
+import { useSelector } from 'react-redux';
 
 interface Props {}
+
+export const BasketCounter = () => {
+  const baskets = useSelector(selectBasket);
+
+  let sumOrderQuantity = 0;
+
+  baskets?.items.forEach(function (value) {
+    sumOrderQuantity += value.quantity;
+  });
+
+  return <p>{sumOrderQuantity}</p>;
+};
 
 export const TopbarCart = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,7 +35,7 @@ export const TopbarCart = memo((props: Props) => {
     <Wrapper>
       <TopbarCartMenu type="button" onClick={toggleProfile}>
         <CartCount>
-          <p>0</p>
+          <BasketCounter />
         </CartCount>
         <CartIcon />
         <Text>{t(...messages.title())}</Text>

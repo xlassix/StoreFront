@@ -5,7 +5,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import FontFaceObserver from 'fontfaceobserver';
-
+import { StoreProvider } from 'easy-peasy';
+import { SWRConfig } from 'swr';
 // Use consistent styling
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -21,6 +22,7 @@ import reportWebVitals from 'reportWebVitals';
 // Initialize languages
 import './locales/i18n';
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
+import { userStore } from 'store/userStore';
 
 const openSansObserver = new FontFaceObserver('Poppins', {});
 
@@ -33,15 +35,19 @@ const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ThemeProvider>
-      <HelmetProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </HelmetProvider>
-    </ThemeProvider>
-  </Provider>,
+  <StoreProvider store={userStore}>
+    <SWRConfig>
+      <Provider store={store}>
+        <ThemeProvider>
+          <HelmetProvider>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </HelmetProvider>
+        </ThemeProvider>
+      </Provider>
+    </SWRConfig>
+  </StoreProvider>,
   MOUNT_NODE,
 );
 

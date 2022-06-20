@@ -1,5 +1,6 @@
 export enum StyleConstants {
   COLOR_ACCENT = '#c00ab5',
+  COLOR_ACCENT2 = '#cc6a18;',
   COLOR_LIGHT_ACCENT = '#ca0bbe',
   COLOR_ACCENT_HOVER = '#8f0787',
   COLOR_ADDITIONAL = '#999999',

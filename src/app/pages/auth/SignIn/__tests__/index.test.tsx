@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-// import { SplitView } from '..';
+// import { SignupPage } from '..';
 
-// describe('<SplitView  />', () => {
+// describe('<SignupPage  />', () => {
 //   it('should match snapshot', () => {
-//     const loadingIndicator = render(<SplitView />);
+//     const loadingIndicator = render(<SignupPage />);
 //     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
 //   });
 // });
