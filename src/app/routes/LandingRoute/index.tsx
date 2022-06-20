@@ -21,9 +21,9 @@ export const LandingRoute = memo((props: Props) => {
         </MainView>
       </Route>
       <Route exact path="/store">
-        {/* <MainView> */}
-        <Stores />
-        {/* </MainView> */}
+        <MainView>
+          <Stores />
+        </MainView>
       </Route>
       <Route path="*" component={NotFoundPage} />
     </Switch>

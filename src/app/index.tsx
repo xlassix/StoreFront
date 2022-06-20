@@ -13,11 +13,11 @@ export function App() {
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s - AltMall"
-        defaultTitle="AltMall"
+        titleTemplate="%s - BetaStore"
+        defaultTitle="BetaStore"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="An AltMall application" />
+        <meta name="description" content="An BetaStore application" />
       </Helmet>
       <MainWrapper>
         <main>

@@ -14,7 +14,7 @@ export const Topbar = memo((props: Props) => {
   return (
     <Wrapper className="topbar">
       <Left>
-        <TopbarSidebarButton />
+        {/* <TopbarSidebarButton /> */}
         <Logo to="/" />
       </Left>
       <Right>
@@ -115,10 +115,10 @@ const Logo = styled(Link)`
   margin: auto 0;
   background-repeat: no-repeat;
   background-position-y: center;
-  background-position-x: left;
+  background-position-x: center;
   background-size: contain;
   display: none;
-  /* //background-image: ${p => p.theme.color.logoImg}; */
+  background-image: ${p => p.theme.color.logoImg};
 
   ${customMedia.greaterThan('large')`
     display: block;

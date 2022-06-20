@@ -11,7 +11,7 @@ export function HomePage() {
     <>
       <Helmet>
         <title>Home Page</title>
-        <meta name="description" content="A AltMall homepage" />
+        <meta name="description" content="A BetaStore homepage" />
       </Helmet>
       {/* <RenderHomepageContentsHere /> */}
       {/* <Container>

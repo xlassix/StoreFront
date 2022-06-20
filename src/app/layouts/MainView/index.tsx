@@ -11,7 +11,7 @@ export const MainView = memo((props: Props) => {
   return (
     <div>
       <div className="layout">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Topbar />
       </div>
       <ContainerWrap className="container_wrap">{props.children}</ContainerWrap>
