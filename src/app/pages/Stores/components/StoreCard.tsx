@@ -19,7 +19,7 @@ const StoreCard = (props: Props) => {
 
   const handleChange = (store: EntityStore) => {
     setSelectedStore(store);
-    history.push('/');
+    history.push('/catalog');
   };
   return (
     <Card onClick={() => handleChange(props.store)}>
