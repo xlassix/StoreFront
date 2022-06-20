@@ -93,12 +93,12 @@ const ProductItem = ({ item }) => {
 
 const CatalogItem = styled(CardBody)`
   flex-basis: calc(33.3333% - 30px);
-  max-width: calc(33.3333% - 30px);
+  max-width: calc(33.333% - 30px);
   margin-bottom: 30px;
   height: 460px;
   position: relative;
   background-color: #fff;
-  margin-right: 30px;
+  margin-right: 0.75rem;
   box-sizing: border-box;
   flex: 1 1 auto;
   min-height: 1px;

@@ -3,11 +3,13 @@ import { Row } from 'reactstrap';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { selectBasket } from '../slice/basketSelector';
+import { useStoreState } from 'easy-peasy';
 
 export const SummarySection = () => {
   //   const [orderTotal, setOrderTotal] = useState(0);
 
   const baskets = useSelector(selectBasket);
+  const selectedStore = useStoreState((state: any) => state.selectedStore);
 
   let sumOrderTotal = 0;
 
@@ -19,7 +21,10 @@ export const SummarySection = () => {
     <Row>
       <div className="container">
         <DivName>
-          <ColName>Selected Store(BamBam Store)</ColName>
+          <ColName>
+            Selected Store(
+            {selectedStore?.Name ? `${selectedStore?.Name}` : 'None'})
+          </ColName>
           <ColName>Payment Method (Cash on Delivery)</ColName>
           <ColName>Order Total (₦{sumOrderTotal})</ColName>
           <ColName>Summary and Checkout</ColName>
@@ -32,7 +37,7 @@ export const SummarySection = () => {
 
 const ColName = styled.span`
   margin-left: 5px;
-  height: 50px;
+  min-height: 50px;
   padding: 28px;
   color: #ffffff;
   background-color: #100276;
@@ -41,5 +46,10 @@ const ColName = styled.span`
 `;
 
 const DivName = styled.div`
+  width: 100%;
   margin-top: 30px;
+  display: flex;
+  flex-direction: row wrap;
+  align-items: center;
+  justify-content: center;
 `;

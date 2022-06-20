@@ -4,7 +4,7 @@ import { EntityStore } from 'types/EntityStore';
 
 interface UserModel {
   user: {};
-  selectedStore: {};
+  selectedStore: any | EntityStore;
   search: string | null;
   setUser: Action<UserModel, User>;
   setSelectStore: Action<UserModel, EntityStore>;
