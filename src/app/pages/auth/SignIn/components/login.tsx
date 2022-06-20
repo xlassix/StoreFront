@@ -45,7 +45,7 @@ const Login = (props: Props) => {
               true,
             );
             setUser(res);
-            history.push('/');
+            history.push('/store');
           } catch (error) {
             //yield put(catalogActions.updateErrorStat(error));
             console.log('Error');

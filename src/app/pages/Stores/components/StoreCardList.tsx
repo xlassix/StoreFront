@@ -10,8 +10,8 @@ interface Props {
 const StoreCardList = (props: Props) => {
   return (
     <Flex>
-      {props.stores.length > 0 ? (
-        props.stores.map(store => {
+      {props?.stores?.length > 0 ? (
+        props?.stores?.map(store => {
           return <StoreCard store={store} key={store.Id} />;
         })
       ) : (
