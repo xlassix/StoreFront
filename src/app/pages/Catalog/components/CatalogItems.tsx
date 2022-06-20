@@ -5,22 +5,36 @@ import ProductItems from './ProductItem';
 import { useBasketSlice } from '../slice/basketSlice';
 import { selectBasket } from '../slice/basketSelector';
 import { useDispatch, useSelector } from 'react-redux';
+import { useStoreState } from 'easy-peasy';
 
 const CatalogItems = ({ catalogList }) => {
   const dispatch = useDispatch();
-
+  const search = useStoreState((state: any) => state.search);
   const baskets = useSelector(selectBasket);
   const { actions } = useBasketSlice();
+
+  function filterCatalog(catalog: any[], search: string): any[] {
+    if (search == '') {
+      return catalog;
+    }
+    return catalog.filter(
+      elem =>
+        `${elem?.Name}`.toLowerCase().includes(search) ||
+        `${elem?.ItemId}`.includes(search) ||
+        `${elem?.WarehouseCode}`.includes(search),
+    );
+  }
 
   useEffect(() => {
     dispatch(actions.setBasket(baskets));
   }, []);
 
+  console.log(catalogList);
   return (
     <Col md={12} lg={12}>
       <CatalogItemsWrap>
         <CatalogItemStyles>
-          {catalogList.map((item, i) => (
+          {filterCatalog(catalogList, search).map((item, i) => (
             <ProductItems item={item} key={i} />
           ))}
         </CatalogItemStyles>

@@ -52,7 +52,7 @@ const StoreCard = (props: Props) => {
 };
 
 const Card = styled.div`
-  background-color: var(--bs-secondary);
+  background: ${p => p.theme.color.colorBackground};
   color: var(--bs-light);
   margin: 0.2rem 0;
   width: 100%;
@@ -72,6 +72,7 @@ const Card = styled.div`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: ${p => p.theme.color.colorText};
     }
 
     & > svg {
@@ -88,7 +89,7 @@ const Card = styled.div`
   & > div.divider {
     width: 100%;
     height: 1px;
-    background-color: white;
+    color: ${p => p.theme.color.colorText};
     margin: 0.2rem 0;
   }
 `;
