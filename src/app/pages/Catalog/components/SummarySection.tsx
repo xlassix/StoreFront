@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { selectBasket } from '../slice/basketSelector';
 import { useStoreState } from 'easy-peasy';
+import { customMedia } from 'styles/media';
 
 export const SummarySection = () => {
   //   const [orderTotal, setOrderTotal] = useState(0);
@@ -37,19 +38,35 @@ export const SummarySection = () => {
 
 const ColName = styled.span`
   margin-left: 5px;
-  min-height: 50px;
-  padding: 28px;
+  height: 5rem;
+  padding: 2rem;
   color: #ffffff;
   background-color: #100276;
   width: auto;
+  flex-basis: 19%;
   font-size: 9px;
+  margin-top: 0.5rem;
+
+  ${customMedia.lessThan('large')`
+  flex-basis: calc(25% - 30px);
+  max-width: calc(25% - 30px);
+`};
+
+  ${customMedia.lessThan('medium')`
+flex-basis: calc(43% - 30px);
+max-width: calc(43% - 30px);
+`};
+
+  ${customMedia.lessThan('small')`
+flex-basis: calc(75% - 30px);
+max-width: calc(75% - 30px);
+`};
 `;
 
 const DivName = styled.div`
-  width: 100%;
   margin-top: 30px;
   display: flex;
-  flex-direction: row wrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: center;
 `;
