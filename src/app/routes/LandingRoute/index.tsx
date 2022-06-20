@@ -5,6 +5,7 @@ import { HomePage } from '../../pages/HomePage/Loadable';
 import { MainView } from '../../layouts/MainView/index';
 import { NotFoundPage } from '../../pages/NotFoundPage/index';
 import { Stores } from '../../pages/Stores/index';
+import { SignIn } from 'app/pages/auth/SignIn/Loadable';
 
 interface Props {}
 
@@ -12,11 +13,9 @@ export const LandingRoute = memo((props: Props) => {
   return (
     <Switch>
       <Route exact path="/">
-        <MainView>
-          <HomePage />
-        </MainView>
+        <SignIn />
       </Route>
-      <Route exact path="/home">
+      <Route exact path="/catalog">
         <MainView>
           <HomePage />
         </MainView>

@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import CatalogItems from './components/CatalogItems';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, selectCatalogs } from './slice/selector';
 import { catalogActions, useCatalogSlice } from './slice';
+import { selectBasket } from './slice/basketSelector';
+import { SummarySection } from './components/SummarySection';
+
 export const Catalog = () => {
   const catalogs = useSelector(selectCatalogs);
-  const loading = useSelector(selectLoading);
+  // const loading = useSelector(selectLoading);
+
   const { actions } = useCatalogSlice();
 
   const dispatch = useDispatch();
@@ -16,23 +20,13 @@ export const Catalog = () => {
     dispatch(actions.fetchCatalogs());
   }, []);
 
-  console.log(catalogs);
-
   // if (loading) {
   //   return <h4>Loading...</h4>;
   // }
 
   return (
     <Container>
-      <Row>
-        <div className="container">
-          <div className="row">
-            <div className="col-sm">One of three columns</div>
-            <div className="col-sm">One of three columns</div>
-            <div className="col-sm">One of three columns</div>
-          </div>
-        </div>
-      </Row>
+      <SummarySection />
       <Row>
         <Col md={12}>
           <PageTitle onClick={() => dispatch(catalogActions.fetchCatalogs())}>
@@ -64,6 +58,7 @@ const menuItem = styled(Row)`
   box-shadow: none;
 `;
 const PageTitle = styled.h3`
+  margin-top: 30px;
   color: #646777;
   text-align: left;
   font-weight: 500;

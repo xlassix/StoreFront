@@ -1,6 +1,7 @@
 import { takeLatest, call, put, delay, all } from 'redux-saga/effects';
 import { apiCall } from 'utils/axios';
 import { catalogActions } from '.';
+import { basketActions } from './basketSlice';
 
 function* fetchCatalog() {
   yield delay(500);
@@ -13,6 +14,20 @@ function* fetchCatalog() {
   }
 }
 
+function* removeItem() {
+  yield delay(500);
+  console.log('remove');
+}
+
+function* setBasket() {
+  yield delay(500);
+  console.log('setBasket');
+}
+
 export function* catalogSagas() {
   yield all([takeLatest(catalogActions.fetchCatalogs, fetchCatalog)]);
+}
+
+export function* basketSagas() {
+  yield all([takeLatest(basketActions.setBasket, setBasket)]);
 }

@@ -1,5 +1,5 @@
-import lightLogo from '../../app/layouts/components/Topbar/assets/alt_mall_logo_white.svg';
-import darkLogo from '../../app/layouts/components/Topbar/assets/alt_mall_logo.svg';
+import lightLogo from '../../app/layouts/components/Topbar/assets/bs.gif';
+import darkLogo from '../../app/layouts/components/Topbar/assets/bs.gif';
 
 const lightTheme = {
   colorBackground: 'white',
