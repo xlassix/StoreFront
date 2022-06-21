@@ -15,7 +15,6 @@ export const TopbarSearch = memo((props: Props) => {
   const inputRef = useRef(null);
   const setSearch = useStoreActions((actions: any) => actions.setSearch);
   const search = useStoreState((state: any) => state.search);
-
   return (
     <Form>
       <SearchIcon />

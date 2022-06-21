@@ -29,7 +29,6 @@ const CatalogItems = ({ catalogList }) => {
     dispatch(actions.setBasket(baskets));
   }, []);
 
-  console.log(catalogList);
   return (
     <Col md={12} lg={12}>
       <CatalogItemsWrap>

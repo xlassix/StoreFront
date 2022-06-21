@@ -3,11 +3,15 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import en from './en/translation.json';
+import fr from './fr/translation.json';
 import { convertLanguageJsonToObject } from './translations';
 
 export const translationsJson = {
   en: {
     translation: en,
+  },
+  fr: {
+    translation: fr,
   },
 };
 
@@ -24,7 +28,7 @@ export const i18n = i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     resources: translationsJson,
-    fallbackLng: 'en',
+    lng: 'en',
     debug:
       process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test',
 

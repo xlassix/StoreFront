@@ -15,11 +15,13 @@ import { ReactComponent as Question } from '../../assets/question.svg';
 import { ReactComponent as Clipboard } from '../../assets/clipboard.svg';
 
 interface Props {}
+const langList = ['en', 'fr'];
 
 export const TopbarProfile = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isLangCollapsed, setIsLangCollapsed] = useState(false);
 
   const toggleProfile = () => {
     setIsCollapsed(!isCollapsed);
@@ -47,7 +49,7 @@ export const TopbarProfile = memo((props: Props) => {
         <TopbarMenu>
           <TopbarMenuLink
             title={t(...messages.menu.signin())}
-            path="/"
+            path="/auth/signin"
             onClick={toggleProfile}
           >
             <Entry />
@@ -94,6 +96,21 @@ export const TopbarProfile = memo((props: Props) => {
           >
             <Clipboard />
           </TopbarMenuLink>
+          <LangWidth onClick={() => setIsLangCollapsed(!isLangCollapsed)}>
+            Change Languange
+          </LangWidth>
+          {isLangCollapsed
+            ? langList.map(lang => (
+                <LangWidth
+                  key={lang}
+                  onClick={() => {
+                    i18n.changeLanguage(lang);
+                  }}
+                >
+                  {lang}
+                </LangWidth>
+              ))
+            : null}
         </TopbarMenu>
       </MenuWrap>
     </Wrapper>
@@ -249,4 +266,9 @@ const TopbarMenu = styled.div`
     width: 100%;
     ${p => p.theme.direction['left']}: 0px !important;
   `}
+`;
+
+const LangWidth = styled.p`
+  color: ${p => p.theme.color.colorText};
+  text-align: center;
 `;

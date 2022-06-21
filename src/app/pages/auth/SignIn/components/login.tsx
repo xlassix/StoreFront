@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Card } from '../layout/card';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Button } from 'app/components/Button/Button';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { apiCall } from 'utils/axios';
 import { useStoreActions, useStoreState } from 'easy-peasy';
@@ -16,6 +17,8 @@ const Login = (props: Props) => {
   const setUser = useStoreActions((actions: any) => actions.setUser);
   const history = useHistory();
   const user = useStoreState((state: any) => state.user);
+  const { t, i18n } = useTranslation();
+  console.log(i18n);
 
   useEffect(() => {
     if (user.isAuthenticated) {
@@ -65,7 +68,7 @@ const Login = (props: Props) => {
             <StyledErrorMessage name="Password" component="p" />
           </div>
 
-          <LoginButton type="submit">Submit</LoginButton>
+          <LoginButton type="submit">{t('storeFront.sign')}</LoginButton>
         </StyledForm>
       </Formik>
     </Card>
