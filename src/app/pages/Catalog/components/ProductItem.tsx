@@ -5,10 +5,12 @@ import { customMedia } from 'styles/media';
 import { useBasketSlice } from '../slice/basketSlice';
 import { selectBasket } from '../slice/basketSelector';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const ProductItem = ({ item }) => {
   const [quantity, setQuantity] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -56,7 +58,7 @@ const ProductItem = ({ item }) => {
 
     setQuantity(totalQty);
   };
-
+  console.log(t('storeFront.product.reduce1'));
   return (
     <CatalogItem key={item.i}>
       <CatalogItemLink>
@@ -76,9 +78,15 @@ const ProductItem = ({ item }) => {
           <CatalogItemPrice>Unit Price : ₦ {item.SalesPrice}</CatalogItemPrice>
         </CatalogItemInfo>
         <Center>
-          <SearchBtn onClick={() => addToCart(1, item)}>Add +1</SearchBtn>
-          <SearchBtn onClick={() => addToCart(3, item)}>Add +3</SearchBtn>
-          <SearchBtn onClick={() => removeFromCart(item)}>Reduce -1</SearchBtn>
+          <SearchBtn onClick={() => addToCart(1, item)}>
+            {t('storeFront.product.add1')}
+          </SearchBtn>
+          <SearchBtn onClick={() => addToCart(3, item)}>
+            {t('storeFront.product.add3')}
+          </SearchBtn>
+          <SearchBtn onClick={() => removeFromCart(item)}>
+            {t('storeFront.product.reduce1')}
+          </SearchBtn>
         </Center>
         <Center>
           <Quantity>

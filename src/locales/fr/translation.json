@@ -37,6 +37,11 @@
     }
   },
   "storeFront": {
-    "sign": "S'identifier"
+    "sign": "S'identifier",
+    "product": {
+      "reduce1": "Réduire -1",
+      "add1": "Ajouter +1",
+      "add3": "Ajouter +3"
+    }
   }
 }

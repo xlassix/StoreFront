@@ -38,6 +38,11 @@
     "storeFront.sign": "Sign In"
   },
   "storeFront": {
-    "sign": "Sign In"
+    "sign": "Sign In",
+    "product": {
+      "add1": "Add +1",
+      "add3": "Add +3",
+      "reduce1": "Reduce 1"
+    }
   }
 }
