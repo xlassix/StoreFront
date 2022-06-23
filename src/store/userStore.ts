@@ -1,4 +1,4 @@
-import { action, thunk, createStore, Thunk, Action } from 'easy-peasy';
+import { action, thunk, createStore, Thunk, Action, persist } from 'easy-peasy';
 import { User } from 'types/User';
 import { EntityStore } from 'types/EntityStore';
 
@@ -12,8 +12,8 @@ interface UserModel {
 }
 
 export const userStore = createStore<UserModel>({
-  user: {},
-  selectedStore: {},
+  user: persist({}),
+  selectedStore: persist({}),
   search: '',
   setUser: action((state, payload: User) => {
     state.user = { ...payload, isAuthenticated: true };
