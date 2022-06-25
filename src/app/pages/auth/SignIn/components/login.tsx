@@ -21,9 +21,9 @@ const Login = (props: Props) => {
   console.log(i18n);
 
   useEffect(() => {
-    if (user.isAuthenticated) {
-      history.push('/');
-    }
+    // if (user.isAuthenticated) {
+    //   history.push('/');
+    // }
   }, [history]);
 
   return (
@@ -32,26 +32,40 @@ const Login = (props: Props) => {
         initialValues={{ UserName: '', Password: '' }}
         validationSchema={Yup.object({
           UserName: Yup.string()
+            .trim()
+            .matches(/^(BO-)|(FA-)/, 'Invalid Prefix ')
             .max(15, '* Must be 15 characters or less')
             .required('* Required'),
           Password: Yup.string()
             .max(20, '* Must be 20 characters or less')
             .required('* Required'),
         })}
-        onSubmit={async values => {
+        onSubmit={async (values, { setErrors }) => {
           try {
+            let UserType = values.UserName.startsWith('BO-') ? 1 : 2;
+            let AuthType = values.UserName.includes('@') ? 5 : 10;
+            console.log({ ...values, UserType, AuthType });
             const res = await apiCall(
-              'GET',
-              '/LoginResponse',
-              values,
+              'POST',
+              '/api/v2/MultiwarehouseDataApi/UserLogin',
+              {
+                ...values,
+                UserType,
+                AuthType,
+                UserName: values.UserName.slice(3),
+              },
               null,
               true,
             );
-            setUser(res);
-            history.push('/store');
-          } catch (error) {
-            //yield put(catalogActions.updateErrorStat(error));
-            console.log('Error');
+            if (res.data) {
+              console.log(res.data);
+              // setUser(res);
+              // history.push('/store');
+            } else {
+              setErrors({ Password: res.Message });
+            }
+          } catch (error: any) {
+            console.log('Error', error);
           }
         }}
       >
