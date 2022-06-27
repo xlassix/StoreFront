@@ -5,12 +5,15 @@ import StoreCard from './StoreCard';
 import { EntityStore } from '../../../../types/EntityStore';
 interface Props {
   stores: EntityStore[];
+  loading?: boolean;
 }
 
 const StoreCardList = (props: Props) => {
   return (
     <Flex>
-      {props?.stores?.length > 0 ? (
+      {props.loading ? (
+        <h4>loading...</h4>
+      ) : props?.stores?.length > 0 ? (
         props?.stores?.map(store => {
           return <StoreCard store={store} key={store.Id} />;
         })
