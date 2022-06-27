@@ -5,10 +5,22 @@ import { apiCall } from './axios';
 export const useStoreData = () => {
   const router = useHistory();
   const { data, error } = useSWR(
-    '/Staff',
+    '/Customer/SearchTheCustomerStoreData',
     url => {
       console.log(url);
-      return apiCall('GET', url, null, null, true);
+      return apiCall(
+        'POST',
+        url,
+        {
+          SearchKey: '905',
+          UserId: 91403,
+          UserType: 1,
+          PageSize: 500,
+          PageNo: 0,
+        },
+        null,
+        false,
+      );
     },
     {
       revalidateIfStale: false,
@@ -19,6 +31,7 @@ export const useStoreData = () => {
   if (error?.message === 'UnAuthorized') {
     router.push('/auth/SignIn');
   }
+  console.log(data, error);
   return {
     stores: error ? null : data?.Stores,
     isLoading: !data && !error,

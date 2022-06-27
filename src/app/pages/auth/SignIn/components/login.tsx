@@ -33,7 +33,7 @@ const Login = (props: Props) => {
         validationSchema={Yup.object({
           UserName: Yup.string()
             .trim()
-            .matches(/^(BO-)|(FA-)/, 'Invalid Prefix ')
+            .matches(/(^(BO-)|(FA-))|@/, 'Invalid Prefix or Email')
             .max(15, '* Must be 15 characters or less')
             .required('* Required'),
           Password: Yup.string()
@@ -52,15 +52,15 @@ const Login = (props: Props) => {
                 ...values,
                 UserType,
                 AuthType,
-                UserName: values.UserName.slice(3),
+                UserName: values.UserName.slice(3), //strip prefix
               },
               null,
               true,
             );
             if (res.data) {
               console.log(res.data);
-              // setUser(res);
-              // history.push('/store');
+              setUser(res.data);
+              history.push('/store');
             } else {
               setErrors({ Password: res.Message });
             }
