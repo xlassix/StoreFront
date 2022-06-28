@@ -6,16 +6,23 @@ import { customMedia } from 'styles/media';
 import { Button } from '../../../../../components/Button/Button';
 import { ReactComponent as Search } from '../../assets/search.svg';
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import useSWR, { useSWRConfig } from 'swr';
 
 interface Props {}
 
 export const TopbarSearch = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { mutate } = useSWRConfig();
   const { t, i18n } = useTranslation();
   const inputRef = useRef(null);
   const setSearch = useStoreActions((actions: any) => actions.setSearch);
   const search = useStoreState((state: any) => state.search);
 
+  const click = e => {
+    e.preventDefault();
+    //refresh stores
+    mutate(`/Customer/SearchTheCustomerStoreData`);
+  };
   return (
     <Form>
       <SearchIcon />
@@ -26,7 +33,9 @@ export const TopbarSearch = memo((props: Props) => {
         ref={inputRef}
         value={search}
       />
-      <SearchBtn className="btn btn-dark">{t(...messages.btnText())}</SearchBtn>
+      <SearchBtn onClick={click} className="btn btn-dark">
+        {t(...messages.btnText())}
+      </SearchBtn>
     </Form>
   );
 });

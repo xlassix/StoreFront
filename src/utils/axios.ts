@@ -7,8 +7,13 @@ const client = axios.create({
 });
 
 const clientTest = axios.create({
-  baseURL: 'http://localhost:5000',
-  headers: { Authorization: `Bearer ${token}` },
+  baseURL: process.env.REACT_APP_SMCORE,
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true,
+    'Content-Type': 'application/json',
+  },
 });
 
 export const apiCall = function (

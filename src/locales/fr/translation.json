@@ -1,0 +1,47 @@
+{
+  "common": {
+    "topbar": {
+      "logo": {
+        "alt_text": "Logo de la marque du centre commercial Alt"
+      },
+      "search": {
+        "placeholder": "Rechercher des produits, des marques, des articles et des catégories",
+        "btn": "Chercher"
+      },
+      "account_menu": {
+        "title": "Compte",
+        "sign_in": "S'identifier",
+        "profile": "Profil",
+        "order_history": "Historique des commandes",
+        "track_orders": "Suivre les commandes",
+        "wallet": "Porte monnaie",
+        "help": "Centre d'aide (FAQ)",
+        "raise_ticket": "Levez un ticket"
+      },
+      "wishlist": {
+        "title": "Liste de souhaits"
+      },
+      "cart": {
+        "title": "Chariot"
+      }
+    },
+    "sidebar": {
+      "greeting": "Hi",
+      "profile_name": "Account",
+      "categories": {
+        "title": "Categories",
+        "page_link": "See All",
+        "mega_menu_banner_alt": "Category ads",
+        "back_to_main_menu": "Back to"
+      }
+    }
+  },
+  "storeFront": {
+    "sign": "S'identifier",
+    "product": {
+      "reduce1": "Réduire -1",
+      "add1": "Ajouter +1",
+      "add3": "Ajouter +3"
+    }
+  }
+}

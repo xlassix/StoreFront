@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Card } from '../layout/card';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Button } from 'app/components/Button/Button';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { apiCall } from 'utils/axios';
 import { useStoreActions, useStoreState } from 'easy-peasy';
@@ -16,11 +17,13 @@ const Login = (props: Props) => {
   const setUser = useStoreActions((actions: any) => actions.setUser);
   const history = useHistory();
   const user = useStoreState((state: any) => state.user);
+  const { t, i18n } = useTranslation();
+  console.log(i18n);
 
   useEffect(() => {
-    if (user.isAuthenticated) {
-      history.push('/');
-    }
+    // if (user.isAuthenticated) {
+    //   history.push('/');
+    // }
   }, [history]);
 
   return (
@@ -29,26 +32,40 @@ const Login = (props: Props) => {
         initialValues={{ UserName: '', Password: '' }}
         validationSchema={Yup.object({
           UserName: Yup.string()
+            .trim()
+            .matches(/(^(BO-)|(FA-))|@/, 'Invalid Prefix or Email')
             .max(15, '* Must be 15 characters or less')
             .required('* Required'),
           Password: Yup.string()
             .max(20, '* Must be 20 characters or less')
             .required('* Required'),
         })}
-        onSubmit={async values => {
+        onSubmit={async (values, { setErrors }) => {
           try {
+            let UserType = values.UserName.startsWith('BO-') ? 1 : 2;
+            let AuthType = values.UserName.includes('@') ? 5 : 10;
+            console.log({ ...values, UserType, AuthType });
             const res = await apiCall(
-              'GET',
-              '/LoginResponse',
-              values,
+              'POST',
+              '/api/v2/MultiwarehouseDataApi/UserLogin',
+              {
+                ...values,
+                UserType,
+                AuthType,
+                UserName: values.UserName.slice(3), //strip prefix
+              },
               null,
               true,
             );
-            setUser(res);
-            history.push('/store');
-          } catch (error) {
-            //yield put(catalogActions.updateErrorStat(error));
-            console.log('Error');
+            if (res.data) {
+              console.log(res.data);
+              setUser(res.data);
+              history.push('/store');
+            } else {
+              setErrors({ Password: res.Message });
+            }
+          } catch (error: any) {
+            console.log('Error', error);
           }
         }}
       >
@@ -65,7 +82,7 @@ const Login = (props: Props) => {
             <StyledErrorMessage name="Password" component="p" />
           </div>
 
-          <LoginButton type="submit">Submit</LoginButton>
+          <LoginButton type="submit">{t('storeFront.sign')}</LoginButton>
         </StyledForm>
       </Formik>
     </Card>

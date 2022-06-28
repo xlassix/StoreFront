@@ -5,10 +5,12 @@ import { customMedia } from 'styles/media';
 import { useBasketSlice } from '../slice/basketSlice';
 import { selectBasket } from '../slice/basketSelector';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const ProductItem = ({ item }) => {
   const [quantity, setQuantity] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -76,9 +78,15 @@ const ProductItem = ({ item }) => {
           <CatalogItemPrice>Unit Price : ₦ {item.SalesPrice}</CatalogItemPrice>
         </CatalogItemInfo>
         <Center>
-          <SearchBtn onClick={() => addToCart(1, item)}>Add +1</SearchBtn>
-          <SearchBtn onClick={() => addToCart(3, item)}>Add +3</SearchBtn>
-          <SearchBtn onClick={() => removeFromCart(item)}>Reduce -1</SearchBtn>
+          <SearchBtn onClick={() => addToCart(1, item)}>
+            {t('storeFront.product.add1')}
+          </SearchBtn>
+          <SearchBtn onClick={() => addToCart(3, item)}>
+            {t('storeFront.product.add3')}
+          </SearchBtn>
+          <SearchBtn onClick={() => removeFromCart(item)}>
+            {t('storeFront.product.reduce1')}
+          </SearchBtn>
         </Center>
         <Center>
           <Quantity>
@@ -93,12 +101,16 @@ const ProductItem = ({ item }) => {
 
 const CatalogItem = styled(CardBody)`
   flex-basis: calc(33.3333% - 30px);
+<<<<<<< HEAD
+  max-width: calc(33.333% - 30px);
+=======
   max-width: calc(33.3333% - 30px);
+>>>>>>> 255dabf (feat: catalog responsive)
   margin-bottom: 30px;
   height: 460px;
   position: relative;
   background-color: #fff;
-  margin-right: 30px;
+  margin-right: 0.75rem;
   box-sizing: border-box;
   flex: 1 1 auto;
   min-height: 1px;

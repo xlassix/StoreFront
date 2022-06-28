@@ -1,26 +1,37 @@
 import useSWR from 'swr';
 import { useHistory } from 'react-router-dom';
 import { apiCall } from './axios';
+import { useStoreState } from 'easy-peasy';
 
 export const useStoreData = () => {
+  const search = useStoreState((state: any) => state.search);
+  const user = useStoreState((state: any) => state.user);
   const router = useHistory();
   const { data, error } = useSWR(
-    '/Staff',
+    `/Customer/SearchTheCustomerStoreData`,
     url => {
       console.log(url);
-      return apiCall('GET', url, null, null, true);
-    },
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
+      return apiCall(
+        'POST',
+        url,
+        {
+          SearchKey: search,
+          UserId: user?.UserId,
+          UserType: user?.UserType,
+          PageSize: 75,
+          PageNo: 0,
+        },
+        null,
+        false,
+      );
     },
   );
   if (error?.message === 'UnAuthorized') {
     router.push('/auth/SignIn');
   }
+  console.log(data, error, user);
   return {
-    stores: error ? null : data?.Stores,
+    stores: error ? null : data?.data,
     isLoading: !data && !error,
     error,
   };

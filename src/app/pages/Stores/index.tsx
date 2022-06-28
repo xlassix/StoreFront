@@ -5,26 +5,28 @@ import { Container } from 'reactstrap';
 import StoreCardList from './components/StoreCardList';
 import { useStoreData } from '../../../utils/hooks';
 import { EntityStore } from 'types/EntityStore';
+import { LoadingIndicator } from 'app/components/LoadingIndicator';
 
 export const Stores = () => {
   const search = useStoreState((state: any) => state.search);
   const { stores, isLoading, error } = useStoreData();
 
   function filterStore(search: string): EntityStore[] {
-    if (search == '') {
+    if (search == '' || !stores) {
       return stores;
     }
     return stores.filter(
       elem =>
         `${elem?.Id}`.includes(search) ||
         `${elem?.Phone}`.includes(search) ||
-        `${elem?.Name}`.toLowerCase().includes(search),
+        `${elem?.Name}`.toLowerCase().includes(search.toLowerCase()) ||
+        `${elem?.Address1}`.toLowerCase().includes(search.toLowerCase()),
     );
   }
   return (
     <Container>
       <HeaderText>Stores</HeaderText>
-      {!isLoading ? <StoreCardList stores={filterStore(search)} /> : null}
+      <StoreCardList stores={filterStore(search)} loading={isLoading} />
     </Container>
   );
 };
