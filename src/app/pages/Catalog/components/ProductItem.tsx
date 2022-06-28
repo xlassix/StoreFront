@@ -58,7 +58,7 @@ const ProductItem = ({ item }) => {
 
     setQuantity(totalQty);
   };
-  console.log(t('storeFront.product.reduce1'));
+
   return (
     <CatalogItem key={item.i}>
       <CatalogItemLink>
