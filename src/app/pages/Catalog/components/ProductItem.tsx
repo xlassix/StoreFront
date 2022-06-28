@@ -101,7 +101,11 @@ const ProductItem = ({ item }) => {
 
 const CatalogItem = styled(CardBody)`
   flex-basis: calc(33.3333% - 30px);
+<<<<<<< HEAD
   max-width: calc(33.333% - 30px);
+=======
+  max-width: calc(33.3333% - 30px);
+>>>>>>> 255dabf (feat: catalog responsive)
   margin-bottom: 30px;
   height: 460px;
   position: relative;
